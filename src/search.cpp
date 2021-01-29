@@ -1144,9 +1144,7 @@ moves_loop: // When in check, search starts from here
               // Futility pruning: parent node (~5 Elo)
               if (   lmrDepth < 7
                   && !ss->inCheck
-                  && !(   pos.extinction_value() == -VALUE_MATE
-                       && pos.extinction_piece_types().find(ALL_PIECES) == pos.extinction_piece_types().end())
-                  && ss->staticEval + (266 + 170 * lmrDepth) * (1 + pos.check_counting()) <= alpha
+                  && ss->staticEval + (266 + 170 * lmrDepth) * (1 + pos.check_counting() + 2 * pos.extinction_single_piece()) <= alpha
                   &&  (*contHist[0])[history_slot(movedPiece)][to_sq(move)]
                     + (*contHist[1])[history_slot(movedPiece)][to_sq(move)]
                     + (*contHist[3])[history_slot(movedPiece)][to_sq(move)]
