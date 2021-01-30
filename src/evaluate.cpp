@@ -1505,7 +1505,7 @@ make_v:
 /// tempo_value() returns the evaluation offset for the side to move
 
 Value Eval::tempo_value(const Position& pos) {
-  return Tempo * (1 + 4 * pos.captures_to_hand());
+  return Tempo * (1 + pos.captures_to_hand() * pos.max_rank() / 2);
 }
 
 
